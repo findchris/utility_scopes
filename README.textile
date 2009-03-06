@@ -138,3 +138,17 @@ using @ordered_by@:
 The current default ordering for a class can always be accessed via @default_ordering@:
 
   Article.default_ordering #=> "published_at DESC"
+
+h3. Use (use instance)
+
+The @use@ scope let's you tap into named_scope's powerful chaining capabilities by creating a scope for an individual ActiveRecord instance.  This has proven useful especially when combined with the @with@ scope for reloading a record with eager associations:
+
+  <pre><code>
+  # Given a Post @post that has no loaded associations, load up the specified associations, instead of:
+  Post.find(:all, :conditions => ["id = ?", @post.id], :include => [{ :comments => :author }, :contributors])
+  
+  # Nice syntax
+  Post.use(@post).with({ :comments => :author }, :contributors)
+  </code></pre>
+
+A TypeError is raised if the argument is not of the calling class (using Object.is_a?).
