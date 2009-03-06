@@ -1,3 +1,6 @@
+0.2.3
+* Added 'use' instance scope.  Example:  Post.use(@post).with({ :comments => :author }, :contributors)
+
 0.2.2
 
 * More flexible @ordered@ syntax (by jney - http://github.com/jney)
